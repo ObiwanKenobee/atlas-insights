@@ -1,0 +1,101 @@
+import type { DashboardSummary, AlertItem, OpportunitySignal } from "@/types/domain";
+
+export const mockDashboardSummary: DashboardSummary = {
+  activeScenarios: 14,
+  simulationsRun: 287,
+  atRiskPortfolios: 5,
+  verifiedImpactAssets: 1243,
+  systemConfidenceScore: 87.4,
+  riskTrend: [
+    { date: "2024-01", value: 42 },
+    { date: "2024-02", value: 45 },
+    { date: "2024-03", value: 48 },
+    { date: "2024-04", value: 52 },
+    { date: "2024-05", value: 47 },
+    { date: "2024-06", value: 55 },
+    { date: "2024-07", value: 61 },
+    { date: "2024-08", value: 58 },
+    { date: "2024-09", value: 63 },
+    { date: "2024-10", value: 59 },
+    { date: "2024-11", value: 67 },
+    { date: "2024-12", value: 72 },
+  ],
+  sectorExposure: [
+    { sector: "Sovereign Debt", exposure: 28.4, change: 2.1 },
+    { sector: "Infrastructure", exposure: 18.7, change: -1.3 },
+    { sector: "Energy Transition", exposure: 15.2, change: 3.8 },
+    { sector: "Agriculture", exposure: 12.1, change: -0.7 },
+    { sector: "Technology", exposure: 10.5, change: 1.2 },
+    { sector: "Real Assets", exposure: 8.3, change: -2.4 },
+    { sector: "Healthcare", exposure: 6.8, change: 0.5 },
+  ],
+};
+
+export const mockAlerts: AlertItem[] = [
+  {
+    id: "a1",
+    title: "Mediterranean Water Stress Escalation",
+    description: "Water availability index dropped below critical threshold in Southern Europe. Affecting agricultural commodity exposure in 3 portfolios.",
+    severity: "critical",
+    timestamp: "2024-12-15T09:23:00Z",
+    source: "Climate Risk Engine",
+    acknowledged: false,
+  },
+  {
+    id: "a2",
+    title: "Supply Chain Chokepoint — Strait of Malacca",
+    description: "Elevated disruption probability detected. Trade flow model indicates 15% reduction in throughput capacity.",
+    severity: "high",
+    timestamp: "2024-12-14T16:45:00Z",
+    source: "Geopolitical Monitor",
+    acknowledged: false,
+  },
+  {
+    id: "a3",
+    title: "Carbon Verification Anomaly — Batch 04",
+    description: "12 assets in Batch 04 show >20% divergence between claimed and verified carbon metrics.",
+    severity: "medium",
+    timestamp: "2024-12-14T11:12:00Z",
+    source: "Impact Verification",
+    acknowledged: true,
+  },
+  {
+    id: "a4",
+    title: "East Africa Sovereign Risk Reclassification",
+    description: "Policy instability indicators triggered reclassification of Kenya and Ethiopia sovereign exposure.",
+    severity: "high",
+    timestamp: "2024-12-13T08:30:00Z",
+    source: "Macro Risk Engine",
+    acknowledged: false,
+  },
+];
+
+export const mockOpportunities: OpportunitySignal[] = [
+  {
+    id: "o1",
+    title: "Nordic Green Infrastructure Bond Allocation",
+    region: "Northern Europe",
+    sector: "Infrastructure",
+    confidence: "high",
+    expectedReturn: 7.2,
+    rationale: "Strong regulatory tailwinds and verified impact metrics support overweight positioning.",
+  },
+  {
+    id: "o2",
+    title: "Southeast Asian Agricultural Resilience",
+    region: "ASEAN",
+    sector: "Agriculture",
+    confidence: "medium",
+    expectedReturn: 5.8,
+    rationale: "Climate adaptation investments showing measurable yield stability improvements.",
+  },
+  {
+    id: "o3",
+    title: "Latin American Renewable Energy Expansion",
+    region: "South America",
+    sector: "Energy Transition",
+    confidence: "high",
+    expectedReturn: 9.1,
+    rationale: "Grid modernization programs accelerating. Favorable policy environment in Brazil and Chile.",
+  },
+];
