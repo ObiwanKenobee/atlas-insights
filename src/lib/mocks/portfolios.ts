@@ -1,0 +1,93 @@
+import type { Portfolio } from "@/types/domain";
+
+export const mockPortfolios: Portfolio[] = [
+  {
+    id: "p1",
+    name: "Global Fixed Income Resilience Sleeve",
+    strategyType: "Fixed Income — Multi-Strategy",
+    aum: 4200000000,
+    benchmark: "Bloomberg Global Aggregate",
+    holdings: [
+      { id: "h1", name: "US Treasury 10Y", ticker: "UST10Y", assetClass: "Sovereign", weight: 15.2, marketValue: 638400000, region: "North America", sector: "Sovereign Debt" },
+      { id: "h2", name: "German Bund 10Y", ticker: "DBR10Y", assetClass: "Sovereign", weight: 12.1, marketValue: 508200000, region: "Western Europe", sector: "Sovereign Debt" },
+      { id: "h3", name: "Nordic Green Bond ETF", ticker: "NGRN", assetClass: "Corporate Bond", weight: 8.4, marketValue: 352800000, region: "Northern Europe", sector: "Energy Transition" },
+      { id: "h4", name: "EM Sovereign Bond Fund", ticker: "EMSOV", assetClass: "Sovereign", weight: 11.3, marketValue: 474600000, region: "Global EM", sector: "Sovereign Debt" },
+      { id: "h5", name: "Infrastructure Credit Fund", ticker: "INFCR", assetClass: "Infrastructure", weight: 9.7, marketValue: 407400000, region: "Global", sector: "Infrastructure" },
+      { id: "h6", name: "Agricultural Commodity Notes", ticker: "AGCN", assetClass: "Commodity-Linked", weight: 6.2, marketValue: 260400000, region: "Global", sector: "Agriculture" },
+    ],
+    regionalExposure: [
+      { region: "North America", weight: 32.1 },
+      { region: "Western Europe", weight: 24.8 },
+      { region: "Northern Europe", weight: 12.3 },
+      { region: "Emerging Markets", weight: 18.5 },
+      { region: "Asia-Pacific", weight: 12.3 },
+    ],
+    sectorAllocation: [
+      { sector: "Sovereign Debt", weight: 38.6 },
+      { sector: "Infrastructure", weight: 18.7 },
+      { sector: "Energy Transition", weight: 15.2 },
+      { sector: "Agriculture", weight: 12.1 },
+      { sector: "Real Assets", weight: 8.2 },
+      { sector: "Other", weight: 7.2 },
+    ],
+    recentScenarios: [
+      { scenarioId: "sc1", scenarioName: "Mediterranean Water Constraint", date: "2024-12-10", result: "-4.7% drawdown" },
+      { scenarioId: "sc5", scenarioName: "Global Inflation Re-acceleration", date: "2024-11-20", result: "-2.1% drawdown" },
+    ],
+    vulnerabilitySummary: "Moderate concentration in Southern European sovereign exposure. Agricultural commodity linkage creates secondary drought risk channel.",
+  },
+  {
+    id: "p2",
+    name: "Emerging Markets Sovereign Debt Fund",
+    strategyType: "EM Fixed Income — Sovereign Focus",
+    aum: 2800000000,
+    benchmark: "JPM EMBI Global Diversified",
+    holdings: [
+      { id: "h7", name: "Brazil Sovereign 2030", ticker: "BRZ30", assetClass: "Sovereign", weight: 14.5, marketValue: 406000000, region: "South America", sector: "Sovereign Debt" },
+      { id: "h8", name: "Kenya Treasury Bond", ticker: "KEN28", assetClass: "Sovereign", weight: 8.2, marketValue: 229600000, region: "East Africa", sector: "Sovereign Debt" },
+      { id: "h9", name: "Indonesia Sovereign", ticker: "IDN29", assetClass: "Sovereign", weight: 11.8, marketValue: 330400000, region: "Southeast Asia", sector: "Sovereign Debt" },
+    ],
+    regionalExposure: [
+      { region: "South America", weight: 28.5 },
+      { region: "East Africa", weight: 16.2 },
+      { region: "Southeast Asia", weight: 22.1 },
+      { region: "Middle East", weight: 15.8 },
+      { region: "Central Asia", weight: 17.4 },
+    ],
+    sectorAllocation: [
+      { sector: "Sovereign Debt", weight: 72.3 },
+      { sector: "Infrastructure", weight: 14.5 },
+      { sector: "Energy Transition", weight: 8.7 },
+      { sector: "Other", weight: 4.5 },
+    ],
+    recentScenarios: [
+      { scenarioId: "sc2", scenarioName: "East Africa Agricultural Stress", date: "2024-12-08", result: "-7.3% drawdown" },
+    ],
+    vulnerabilitySummary: "High concentration in East African sovereign exposure with food security dependency. Political instability creates compounding risk.",
+  },
+  {
+    id: "p3",
+    name: "Asia-Pacific Growth Allocation",
+    strategyType: "Multi-Asset — Growth Oriented",
+    aum: 6100000000,
+    benchmark: "MSCI AC Asia Pacific",
+    holdings: [],
+    regionalExposure: [
+      { region: "China", weight: 28.2 },
+      { region: "Japan", weight: 22.1 },
+      { region: "Southeast Asia", weight: 18.5 },
+      { region: "India", weight: 15.7 },
+      { region: "Oceania", weight: 15.5 },
+    ],
+    sectorAllocation: [
+      { sector: "Technology", weight: 32.1 },
+      { sector: "Infrastructure", weight: 18.4 },
+      { sector: "Energy Transition", weight: 16.2 },
+      { sector: "Healthcare", weight: 12.8 },
+      { sector: "Agriculture", weight: 10.5 },
+      { sector: "Other", weight: 10.0 },
+    ],
+    recentScenarios: [],
+    vulnerabilitySummary: "Supply chain chokepoint exposure through Strait of Malacca dependency. Technology sector concentration in geopolitically sensitive regions.",
+  },
+];
