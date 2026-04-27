@@ -7,8 +7,9 @@ import { PageSkeleton } from "@/components/layout/LoadingSkeletons";
 import { Button } from "@/components/ui/button";
 import { RISK_DOMAINS } from "@/lib/constants";
 import type { RiskPropagationNode, RiskDomain } from "@/types/domain";
-import { GitBranch, ArrowRight } from "lucide-react";
+import { GitBranch, ArrowRight, Search } from "lucide-react";
 import { ForceGraph } from "@/components/graph/ForceGraph";
+import { PropagationChainDrawer } from "@/components/graph/PropagationChainDrawer";
 
 const domainColors: Record<RiskDomain, string> = {
   climate: "bg-chart-2",
@@ -23,6 +24,12 @@ export default function GraphPage() {
   const { data: graph, isLoading } = usePropagationGraph();
   const [selectedDomains, setSelectedDomains] = useState<string[]>(RISK_DOMAINS.map(d => d.value));
   const [selectedNode, setSelectedNode] = useState<RiskPropagationNode | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const openChainFor = (node: RiskPropagationNode) => {
+    setSelectedNode(node);
+    setDrawerOpen(true);
+  };
 
   const toggleDomain = (value: string) => {
     setSelectedDomains(prev =>
@@ -73,7 +80,7 @@ export default function GraphPage() {
                 nodes={filteredNodes}
                 edges={filteredEdges}
                 selectedNodeId={selectedNode?.id ?? null}
-                onSelectNode={setSelectedNode}
+                onSelectNode={openChainFor}
                 height={520}
               />
             </div>
@@ -119,6 +126,15 @@ export default function GraphPage() {
                   <SectionHeader title="Description" />
                   <p className="text-xs text-muted-foreground">{selectedNode.description}</p>
                 </div>
+
+                <Button
+                  size="sm"
+                  className="w-full gap-1.5"
+                  onClick={() => setDrawerOpen(true)}
+                >
+                  <Search className="h-3.5 w-3.5" />
+                  Inspect propagation chain
+                </Button>
 
                 <div>
                   <SectionHeader title="Outgoing Connections" />
@@ -169,6 +185,13 @@ export default function GraphPage() {
           </div>
         </div>
       </div>
+
+      <PropagationChainDrawer
+        graph={graph}
+        node={selectedNode}
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+      />
     </AppLayout>
   );
 }

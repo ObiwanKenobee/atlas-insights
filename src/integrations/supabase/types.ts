@@ -41,6 +41,143 @@ export type Database = {
         }
         Relationships: []
       }
+      scenarios: {
+        Row: {
+          affected_sectors: string[]
+          assumptions: string | null
+          created_at: string
+          duration: string
+          event: string
+          id: string
+          name: string
+          notes: string | null
+          probability: number
+          region: string
+          severity: number
+          status: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          affected_sectors?: string[]
+          assumptions?: string | null
+          created_at?: string
+          duration?: string
+          event?: string
+          id?: string
+          name: string
+          notes?: string | null
+          probability?: number
+          region?: string
+          severity?: number
+          status?: string
+          type?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          affected_sectors?: string[]
+          assumptions?: string | null
+          created_at?: string
+          duration?: string
+          event?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          probability?: number
+          region?: string
+          severity?: number
+          status?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      simulation_runs: {
+        Row: {
+          assumptions: Json
+          completed_at: string | null
+          created_at: string
+          drawdown_timeline: Json
+          drivers: Json
+          error_message: string | null
+          expected_drawdown: number | null
+          exposure_concentration_shift: number | null
+          id: string
+          portfolio_id: string
+          portfolio_name: string
+          progress: number
+          recommendations: Json
+          risk_confidence_score: number | null
+          scenario_id: string | null
+          scenario_name: string
+          sector_impact: Json
+          started_at: string
+          status: string
+          updated_at: string
+          user_id: string
+          volatility_increase: number | null
+        }
+        Insert: {
+          assumptions?: Json
+          completed_at?: string | null
+          created_at?: string
+          drawdown_timeline?: Json
+          drivers?: Json
+          error_message?: string | null
+          expected_drawdown?: number | null
+          exposure_concentration_shift?: number | null
+          id?: string
+          portfolio_id: string
+          portfolio_name: string
+          progress?: number
+          recommendations?: Json
+          risk_confidence_score?: number | null
+          scenario_id?: string | null
+          scenario_name: string
+          sector_impact?: Json
+          started_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          volatility_increase?: number | null
+        }
+        Update: {
+          assumptions?: Json
+          completed_at?: string | null
+          created_at?: string
+          drawdown_timeline?: Json
+          drivers?: Json
+          error_message?: string | null
+          expected_drawdown?: number | null
+          exposure_concentration_shift?: number | null
+          id?: string
+          portfolio_id?: string
+          portfolio_name?: string
+          progress?: number
+          recommendations?: Json
+          risk_confidence_score?: number | null
+          scenario_id?: string | null
+          scenario_name?: string
+          sector_impact?: Json
+          started_at?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          volatility_increase?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "simulation_runs_scenario_id_fkey"
+            columns: ["scenario_id"]
+            isOneToOne: false
+            referencedRelation: "scenarios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

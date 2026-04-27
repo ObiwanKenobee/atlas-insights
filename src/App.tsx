@@ -11,6 +11,7 @@ import RiskRadarPage from "./pages/RiskRadar";
 import ScenariosPage from "./pages/Scenarios";
 import ScenarioBuilderPage from "./pages/ScenarioBuilder";
 import SimulationsPage from "./pages/Simulations";
+import SimulationRunnerPage from "./pages/SimulationRunner";
 import SimulationDetailPage from "./pages/SimulationDetail";
 import PortfoliosPage from "./pages/Portfolios";
 import PortfolioDetailPage from "./pages/PortfolioDetail";
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/scenarios/new" element={protect(<ScenarioBuilderPage />)} />
             <Route path="/scenarios/:id" element={protect(<ScenariosPage />)} />
             <Route path="/simulations" element={protect(<SimulationsPage />)} />
+            <Route path="/simulations/new" element={protect(<SimulationRunnerPage />)} />
             <Route path="/simulations/:id" element={protect(<SimulationDetailPage />)} />
             <Route path="/portfolios" element={protect(<PortfoliosPage />)} />
             <Route path="/portfolios/:id" element={protect(<PortfolioDetailPage />)} />
