@@ -7,8 +7,9 @@ import { PageSkeleton } from "@/components/layout/LoadingSkeletons";
 import { Button } from "@/components/ui/button";
 import { RISK_DOMAINS } from "@/lib/constants";
 import type { RiskPropagationNode, RiskDomain } from "@/types/domain";
-import { GitBranch, ArrowRight } from "lucide-react";
+import { GitBranch, ArrowRight, Search } from "lucide-react";
 import { ForceGraph } from "@/components/graph/ForceGraph";
+import { PropagationChainDrawer } from "@/components/graph/PropagationChainDrawer";
 
 const domainColors: Record<RiskDomain, string> = {
   climate: "bg-chart-2",
@@ -23,6 +24,12 @@ export default function GraphPage() {
   const { data: graph, isLoading } = usePropagationGraph();
   const [selectedDomains, setSelectedDomains] = useState<string[]>(RISK_DOMAINS.map(d => d.value));
   const [selectedNode, setSelectedNode] = useState<RiskPropagationNode | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const openChainFor = (node: RiskPropagationNode) => {
+    setSelectedNode(node);
+    setDrawerOpen(true);
+  };
 
   const toggleDomain = (value: string) => {
     setSelectedDomains(prev =>
