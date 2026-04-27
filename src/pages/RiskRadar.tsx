@@ -6,8 +6,9 @@ import { SeverityBadge, ConfidenceBadge } from "@/components/badges/StatusBadges
 import { PageSkeleton } from "@/components/layout/LoadingSkeletons";
 import { RISK_OVERLAY_OPTIONS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
-import { Globe, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import type { RegionRiskSummary } from "@/types/domain";
+import { WorldMap } from "@/components/maps/WorldMap";
 
 export default function RiskRadarPage() {
   const { data: regions, isLoading } = useRiskRadar();
@@ -46,17 +47,20 @@ export default function RiskRadarPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Map Placeholder */}
-          <div className="lg:col-span-2 rounded-lg border border-border bg-card p-6 flex flex-col items-center justify-center min-h-[400px]">
-            <Globe className="h-16 w-16 text-muted-foreground/30 mb-4" />
-            <p className="text-sm text-muted-foreground font-medium">Geospatial Risk Map</p>
-            <p className="text-xs text-muted-foreground mt-1">Mapbox GL integration placeholder</p>
-            <div className="mt-6 w-full max-w-md space-y-2">
+          {/* Interactive World Map */}
+          <div className="lg:col-span-2 rounded-lg border border-border bg-card p-4">
+            <SectionHeader title="Geospatial Risk Map" subtitle="Click a region to inspect" />
+            <WorldMap
+              regions={regions ?? []}
+              selectedRegion={selectedRegion?.region ?? null}
+              onSelectRegion={setSelectedRegion}
+            />
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
               {regions?.map((region) => (
                 <button
                   key={region.region}
                   onClick={() => setSelectedRegion(region)}
-                  className={`w-full flex items-center justify-between p-3 rounded-md border transition-colors text-left
+                  className={`w-full flex items-center justify-between p-2.5 rounded-md border transition-colors text-left
                     ${selectedRegion?.region === region.region
                       ? "border-primary bg-primary/5"
                       : "border-border bg-muted/30 hover:bg-muted/50"
@@ -64,7 +68,7 @@ export default function RiskRadarPage() {
                 >
                   <div className="flex items-center gap-2">
                     <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
-                    <span className="text-sm font-medium text-foreground">{region.region}</span>
+                    <span className="text-xs font-medium text-foreground">{region.region}</span>
                   </div>
                   <SeverityBadge level={region.overallSeverity} />
                 </button>
