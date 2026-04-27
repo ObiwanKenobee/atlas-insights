@@ -80,7 +80,7 @@ export default function GraphPage() {
                 nodes={filteredNodes}
                 edges={filteredEdges}
                 selectedNodeId={selectedNode?.id ?? null}
-                onSelectNode={setSelectedNode}
+                onSelectNode={openChainFor}
                 height={520}
               />
             </div>
@@ -126,6 +126,15 @@ export default function GraphPage() {
                   <SectionHeader title="Description" />
                   <p className="text-xs text-muted-foreground">{selectedNode.description}</p>
                 </div>
+
+                <Button
+                  size="sm"
+                  className="w-full gap-1.5"
+                  onClick={() => setDrawerOpen(true)}
+                >
+                  <Search className="h-3.5 w-3.5" />
+                  Inspect propagation chain
+                </Button>
 
                 <div>
                   <SectionHeader title="Outgoing Connections" />
