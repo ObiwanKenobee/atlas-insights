@@ -21,19 +21,19 @@ const REGIONS: RegionShape[] = [
     centroid: [275, 345],
   },
   {
-    name: "Europe",
-    d: "M 470 105 L 540 95 L 580 115 L 575 165 L 535 185 L 490 175 L 465 145 Z",
-    centroid: [520, 140],
+    name: "Western Europe",
+    d: "M 460 105 L 510 95 L 530 130 L 520 170 L 480 175 L 455 145 Z",
+    centroid: [490, 140],
   },
   {
-    name: "Africa",
-    d: "M 480 200 L 555 195 L 590 230 L 585 305 L 555 365 L 510 380 L 480 345 L 465 285 L 470 235 Z",
-    centroid: [525, 290],
+    name: "Southern Europe",
+    d: "M 480 175 L 540 170 L 575 185 L 565 215 L 510 220 L 480 200 Z",
+    centroid: [520, 195],
   },
   {
-    name: "Middle East",
-    d: "M 590 175 L 645 170 L 670 200 L 660 240 L 615 245 L 590 220 Z",
-    centroid: [625, 210],
+    name: "East Africa",
+    d: "M 555 230 L 605 225 L 615 280 L 595 330 L 565 335 L 545 290 Z",
+    centroid: [580, 285],
   },
   {
     name: "Asia",
