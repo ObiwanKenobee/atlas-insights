@@ -185,6 +185,13 @@ export default function GraphPage() {
           </div>
         </div>
       </div>
+
+      <PropagationChainDrawer
+        graph={graph}
+        node={selectedNode}
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+      />
     </AppLayout>
   );
 }
