@@ -11,6 +11,8 @@ import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip,
   ResponsiveContainer, CartesianGrid,
 } from "recharts";
+import { motion } from "framer-motion";
+import { AnimatedPage, staggerContainer, staggerItem } from "@/components/layout/AnimatedPage";
 
 export default function DashboardPage() {
   const { data: summary, isLoading: summaryLoading } = useDashboardSummary();
