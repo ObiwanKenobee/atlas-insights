@@ -22,8 +22,7 @@ import { toast } from "@/hooks/use-toast";
 
 export default function SimulationsPage() {
   const navigate = useNavigate();
-  const { data: simulations, isLoading } = useSimulations({} as never);
-  // ^ we keep the same shape — cast not actually needed
+  const { data: simulations, isLoading } = useSimulations();
   const deleteMut = useDeleteSimulation();
   const [deleting, setDeleting] = useState<SimulationRun | null>(null);
 
