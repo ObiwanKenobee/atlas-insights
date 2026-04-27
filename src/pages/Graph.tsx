@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { RISK_DOMAINS } from "@/lib/constants";
 import type { RiskPropagationNode, RiskDomain } from "@/types/domain";
 import { GitBranch, ArrowRight } from "lucide-react";
+import { ForceGraph } from "@/components/graph/ForceGraph";
 
 const domainColors: Record<RiskDomain, string> = {
   climate: "bg-chart-2",
@@ -61,50 +62,42 @@ export default function GraphPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Graph Visualization Placeholder */}
-          <div className="lg:col-span-2 rounded-lg border border-border bg-card p-6">
-            <SectionHeader title="Propagation Network" subtitle={`${filteredNodes.length} nodes · ${filteredEdges.length} edges`} />
-            
-            {/* Node Grid (placeholder for D3/force-directed graph) */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">
-              {filteredNodes.map((node) => (
-                <button
-                  key={node.id}
-                  onClick={() => setSelectedNode(node)}
-                  className={`p-3 rounded-md border text-left transition-colors
-                    ${selectedNode?.id === node.id
-                      ? "border-primary bg-primary/5"
-                      : "border-border bg-muted/30 hover:bg-muted/50"
-                    }`}
-                >
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className={`w-2 h-2 rounded-full ${domainColors[node.domain]}`} />
-                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{node.domain}</span>
-                  </div>
-                  <p className="text-xs font-medium text-foreground">{node.label}</p>
-                  <div className="mt-1">
-                    <SeverityBadge level={node.severity} />
-                  </div>
-                </button>
-              ))}
+          {/* Force-directed graph */}
+          <div className="lg:col-span-2 rounded-lg border border-border bg-card p-4">
+            <SectionHeader
+              title="Propagation Network"
+              subtitle={`${filteredNodes.length} nodes · ${filteredEdges.length} edges · drag to reposition`}
+            />
+            <div className="mt-2">
+              <ForceGraph
+                nodes={filteredNodes}
+                edges={filteredEdges}
+                selectedNodeId={selectedNode?.id ?? null}
+                onSelectNode={setSelectedNode}
+                height={520}
+              />
             </div>
 
             {/* Propagation Chain Summary */}
-            <div className="mt-6 pt-4 border-t border-border">
-              <SectionHeader title="Propagation Chains" />
+            <div className="mt-4 pt-4 border-t border-border">
+              <SectionHeader title="Top Propagation Chains" />
               <div className="space-y-2">
-                {filteredEdges.slice(0, 6).map((edge, i) => {
-                  const source = graph.nodes.find(n => n.id === edge.source);
-                  const target = graph.nodes.find(n => n.id === edge.target);
-                  return (
-                    <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground p-2 rounded bg-muted/20">
-                      <span className="font-medium text-foreground">{source?.label}</span>
-                      <ArrowRight className="h-3 w-3 text-primary shrink-0" />
-                      <span className="font-medium text-foreground">{target?.label}</span>
-                      <span className="ml-auto font-mono text-[10px]">{(edge.weight * 100).toFixed(0)}%</span>
-                    </div>
-                  );
-                })}
+                {filteredEdges
+                  .slice()
+                  .sort((a, b) => b.weight - a.weight)
+                  .slice(0, 5)
+                  .map((edge, i) => {
+                    const source = graph.nodes.find(n => n.id === edge.source);
+                    const target = graph.nodes.find(n => n.id === edge.target);
+                    return (
+                      <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground p-2 rounded bg-muted/20">
+                        <span className="font-medium text-foreground">{source?.label}</span>
+                        <ArrowRight className="h-3 w-3 text-primary shrink-0" />
+                        <span className="font-medium text-foreground">{target?.label}</span>
+                        <span className="ml-auto font-mono text-[10px]">{(edge.weight * 100).toFixed(0)}%</span>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
